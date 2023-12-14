@@ -94,8 +94,9 @@ def make_adaptive_mask(data, mask=None, getsum=False, threshold=1):
 
     # determine samples where absolute value is greater than echo-specific thresholds
     # and count # of echos that pass criterion
-    masksum = (np.abs(echo_means) > lthrs).sum(axis=-1)
-
+    # masksum = (np.abs(echo_means) > lthrs).sum(axis=-1)
+    masksum = (np.abs(echo_means) > 0).sum(axis=-1)
+    
     if mask is None:
         # make it a boolean mask to (where we have at least `threshold` echoes with good signal)
         mask = (masksum >= threshold).astype(bool)
